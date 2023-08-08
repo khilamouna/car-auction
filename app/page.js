@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
-
 import CarCards from "../components/CarCards";
 
 const Home = () => {
@@ -9,7 +8,6 @@ const Home = () => {
     <div>
       <Navbar />
       <HeroSection />
-
       <CarCards />
     </div>
   );

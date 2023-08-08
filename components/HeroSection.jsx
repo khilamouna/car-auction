@@ -30,6 +30,13 @@ const HeroSection = () => {
             <p className="flex items-center text-black">
               Time is ticking <BiStopwatch className="text-blue-800 ml-2" />
             </p>
+            <button
+              type="submit"
+              aria-label="submit"
+              className="text-white bg-green bg-blue-800 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Bid Now
+            </button>
           </div>
         </div>
 
@@ -47,6 +54,13 @@ const HeroSection = () => {
           <div className="carousel-caption absolute top-10 left-0 right-0 p-4 text-blue-800 text-4xl text-left">
             <h3 className="text-7xl font-bold text-black">Opportunity</h3>
             <p>Don't miss it !</p>
+            <button
+              type="submit"
+              aria-label="submit"
+              className="text-white bg-green bg-blue-800 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Bid Now
+            </button>
           </div>
         </div>
       </Carousel>

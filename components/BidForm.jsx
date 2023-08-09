@@ -1,18 +1,17 @@
+"use client";
 import { useState } from "react";
 
-const BidForm = () => {
+const BidForm = ({ onBidSubmit }) => {
   const [bidAmount, setBidAmount] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [bidHistory, setBidHistory] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (bidAmount && name && email) {
-      setBidHistory([
-        ...bidHistory,
-        { name, email, bid: parseFloat(bidAmount) },
-      ]);
+      const newBidData = { name, email, bid: parseFloat(bidAmount) };
+      onBidSubmit(newBidData);
+
       setBidAmount("");
       setName("");
       setEmail("");
@@ -51,16 +50,6 @@ const BidForm = () => {
           Place Bid
         </button>
       </form>
-      <div className="mt-6">
-        <h3 className="text-xl font-bold mb-2">Bid History</h3>
-        <ul className="list-disc list-inside">
-          {bidHistory.map((bid, index) => (
-            <li key={index}>
-              Bid: ${bid.bid.toFixed(2)} by {bid.name} ({bid.email})
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };

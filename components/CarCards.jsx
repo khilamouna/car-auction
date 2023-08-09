@@ -7,19 +7,27 @@ import BidHistory from "./BidHistory";
 const CarCards = () => {
   const [showModal, setShowModal] = useState(false);
   const [bidHistory, setBidHistory] = useState([]);
+  const [isBiddingAllowed, setIsBiddingAllowed] = useState(true);
 
   const openModal = () => {
-    setShowModal(true);
+    if (isBiddingAllowed) {
+      setShowModal(true);
+    } else {
+      alert("Too late! Bidding time has ended.");
+    }
   };
 
   const closeModal = () => {
     setShowModal(false);
   };
-  // CarCards.js
 
   const addBidToHistory = (bidData) => {
     setBidHistory((prevBidHistory) => [...prevBidHistory, bidData]);
     closeModal();
+  };
+
+  const handleTimeUp = () => {
+    setIsBiddingAllowed(false);
   };
 
   const carsData = [
@@ -46,7 +54,7 @@ const CarCards = () => {
         {" "}
         2015 Hyundai ELANTRA GLS 4 Doors
       </h1>
-      <Chronometer />
+      <Chronometer onTimeUp={handleTimeUp} />
       <div className="car-section grid grid-cols-1 md:grid-cols-3 gap-4  mt-10 p-4">
         {carsData.map((car, index) => (
           <div key={index} className="car-item">
@@ -62,27 +70,26 @@ const CarCards = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-center items-center m-10">
-        <button
-          onClick={openModal}
-          className="text-blue bg-green bg-blue-800 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Bid Now
-        </button>
-      </div>
+
+      <button
+        onClick={openModal}
+        disabled={!isBiddingAllowed}
+        className={`block mt-5 text-blue bg-green ${
+          !isBiddingAllowed ? "bg-gray-400" : "bg-blue-800"
+        } hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+      >
+        {isBiddingAllowed ? "Bid Now" : "Bidding Ended"}
+      </button>
 
       {showModal && (
         <div>
           <h2>Place Your Bid</h2>
-
           <BidForm onClose={closeModal} onBidSubmit={addBidToHistory} />
         </div>
       )}
-      <div className="flex justify-center items-center m-10 p-10 bg-gray-200">
-        {" "}
-        <BidHistory bidHistory={bidHistory} />
-      </div>
+      <BidHistory bidHistory={bidHistory} />
     </div>
   );
 };
+
 export default CarCards;

@@ -1,10 +1,9 @@
 "use client";
-import Head from "next/head";
 
 import { useEffect, useState } from "react";
 import { BiStopwatch } from "react-icons/bi";
 
-const Chronometer = () => {
+const Chronometer = ({ onTimeUp }) => {
   const [partyTime, setPartyTime] = useState(false);
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
@@ -12,7 +11,7 @@ const Chronometer = () => {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    const target = new Date("08/09/2023 23:59:59");
+    const target = new Date("08/09/2023 23:08:59");
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -34,6 +33,7 @@ const Chronometer = () => {
 
       if (d <= 0 && h <= 0 && m <= 0 && s <= 0) {
         setPartyTime(true);
+        onTimeUp();
       }
     }, 1000);
 
@@ -44,7 +44,7 @@ const Chronometer = () => {
     <div className="text-center">
       {partyTime ? (
         <>
-          <h1>Time is out!</h1>
+          <h1>Time is up!</h1>
           <video autoPlay loop muted>
             <source src="/party.mp4" />
           </video>

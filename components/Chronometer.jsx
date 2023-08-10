@@ -45,9 +45,6 @@ const Chronometer = ({ onTimeUp }) => {
       {partyTime ? (
         <>
           <h1>Time is up!</h1>
-          <video autoPlay loop muted>
-            <source src="/party.mp4" />
-          </video>
         </>
       ) : (
         <>
